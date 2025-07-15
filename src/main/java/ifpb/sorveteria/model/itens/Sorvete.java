@@ -24,4 +24,9 @@ public class Sorvete {
     public void setPreco(double preco) {
         this.preco = preco;
     }
+
+    @Override
+    public String toString(){
+        return "Sorvete de " + sabor + " - R$ " + preco;
+    }
 }

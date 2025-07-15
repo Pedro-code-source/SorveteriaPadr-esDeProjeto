@@ -13,13 +13,9 @@ public class SorveteFactory implements ItemFactory<Sorvete> {
     );
 
     @Override
-    public Sorvete criarItem(String nomeItem) {
-        Double precoBase = tabelaDePrecos.get(nomeItem.toLowerCase());
+    public Sorvete criarItem(String sabor) {
+        Double precoBase = tabelaDePrecos.get(sabor);
 
-        if (precoBase == null) {
-            throw new IllegalArgumentException("Sabor '" + nomeItem + "' não encontrado.");
-        }
-
-        return new Sorvete(nomeItem, precoBase);
+        return new Sorvete(sabor, precoBase);
     }
 }

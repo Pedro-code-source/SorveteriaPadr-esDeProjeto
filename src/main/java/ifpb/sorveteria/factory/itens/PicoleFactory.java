@@ -14,11 +14,7 @@ public class PicoleFactory implements ItemFactory<Picole> {
 
     @Override
     public Picole criarItem(String nomeItem) {
-        Double precoBase = tabelaDePrecos.get(nomeItem.toUpperCase());
-
-        if (precoBase == null) {
-            throw new IllegalArgumentException("Sabor '" + nomeItem + "' não encontrado.");
-        }
+        Double precoBase = tabelaDePrecos.get(nomeItem);
 
         return new Picole(nomeItem, precoBase);
     }

@@ -4,9 +4,9 @@ public class MilkShake {
     private String sabor;
     private double preco;
 
-    public MilkShake(String sabor){
-        this.sabor = "Milkshake de " + sabor;
-        this.preco = 7.00;
+    public MilkShake(String sabor, double precoBase){
+        this.sabor = sabor;
+        this.preco = precoBase;
     }
 
     public String getSabor() {
