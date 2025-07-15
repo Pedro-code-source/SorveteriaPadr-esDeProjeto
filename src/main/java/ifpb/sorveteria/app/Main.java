@@ -7,7 +7,7 @@ import ifpb.sorveteria.model.Picole;
 import ifpb.sorveteria.model.Sorvete;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Sorvete sorvete = new SorveteFactory().criarItem("morango");
         MilkShake milkshake = new MilkShakeFactory().criarItem("Açai");
         Picole picole = new PicoleFactory().criarItem("pedacinho do ceu");
@@ -20,5 +20,10 @@ public class Main {
         System.out.println(pedido.getPedidos());
         System.out.println(pedido.getValorFinal());
         pedido.listarPedidos();
+
+
+        //pedido.finalizado();
+
+        //System.out.println(pedido.getEstadoDoPedido());
     }
 }
