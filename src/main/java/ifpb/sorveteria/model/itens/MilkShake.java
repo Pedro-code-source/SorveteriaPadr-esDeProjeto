@@ -1,8 +1,6 @@
-package ifpb.sorveteria.model;
+package ifpb.sorveteria.model.itens;
 
-import ifpb.sorveteria.factory.AdicionalFactory;
-
-public class MilkShake implements AdicionalFactory {
+public class MilkShake {
     private String sabor;
     private double preco;
 
@@ -10,13 +8,7 @@ public class MilkShake implements AdicionalFactory {
         this.sabor = "Milkshake de " + sabor;
         this.preco = 7.00;
     }
-    @Override
-    public void adicionar(String adicional,String tipo, double preco) {
-        setPreco(getPreco()+preco);
-        setSabor(getSabor() + " com " + tipo + " de " + adicional + "valor: " + getPreco());
-    }
 
-    @Override
     public String getSabor() {
         return sabor;
     }
@@ -24,7 +16,7 @@ public class MilkShake implements AdicionalFactory {
     public void setSabor(String sabor) {
         this.sabor = sabor;
     }
-    @Override
+
     public double getPreco() {
         return preco;
     }
