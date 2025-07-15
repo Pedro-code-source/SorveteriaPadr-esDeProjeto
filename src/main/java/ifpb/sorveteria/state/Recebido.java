@@ -5,7 +5,7 @@ import ifpb.sorveteria.model.Pedido;
 public class Recebido implements EstadoPedido{
     @Override
     public void recebido(Pedido pedido) throws Exception {
-        throw new Exception("O pedido já foi recebido e está em preprado!");
+        throw new Exception("O pedido já foi recebido e está em preparo!");
     }
 
     @Override
@@ -15,6 +15,6 @@ public class Recebido implements EstadoPedido{
 
     @Override
     public void finalizado(Pedido pedido) throws Exception {
-        throw new Exception("O pedido já foi recebido e está em preprado!");
+        throw new Exception("O pedido já foi recebido e está em preparo!");
     }
 }
