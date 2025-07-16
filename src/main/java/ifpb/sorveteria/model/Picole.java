@@ -1,21 +1,14 @@
 package ifpb.sorveteria.model;
 
-import ifpb.sorveteria.factory.AdicionalFactory;
+import ifpb.sorveteria.factory.Item;
 
-public class Picole implements AdicionalFactory {
+public class Picole implements Item {
     private String sabor;
     private double preco;
 
     public Picole(String sabor){
         this.sabor = "Picolé de " + sabor;
         this.preco = 2.00;
-    }
-
-
-    @Override
-    public void adicionar(String adicional,String tipo, double preco) {
-        setPreco(getPreco()+preco);
-        System.out.println("Sorvete de " + getSabor() + " com " + tipo + " de " + adicional + " valor: " + getPreco());
     }
 
     @Override

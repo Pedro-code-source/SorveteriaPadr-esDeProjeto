@@ -1,15 +1,12 @@
 package ifpb.sorveteria.model;
 
-import ifpb.sorveteria.factory.AdicionalFactory;
-import ifpb.sorveteria.factory.MilkShakeFactory;
-import ifpb.sorveteria.factory.SorveteFactory;
+import ifpb.sorveteria.factory.Item;
 import ifpb.sorveteria.state.EstadoPedido;
 import ifpb.sorveteria.state.Recebido;
 
-import java.awt.*;
 import java.util.ArrayList;
 
-public class Pedido<T extends AdicionalFactory> {
+public class Pedido<T extends Item> {
 
     ArrayList<T> pedidos = new ArrayList<T>();
     private double valorFinal;
@@ -24,7 +21,7 @@ public class Pedido<T extends AdicionalFactory> {
     }
 
     public double getValorFinal() {
-        for (AdicionalFactory i : pedidos){
+        for (Item i : pedidos){
             valorFinal += i.getPreco();
         }
         return valorFinal;
@@ -32,7 +29,7 @@ public class Pedido<T extends AdicionalFactory> {
 
     public void listarPedidos(){
         int contador = 0;
-        for (AdicionalFactory i : pedidos){
+        for (Item i : pedidos){
             contador ++;
             System.out.println(contador + "- " + i.getSabor());
         }

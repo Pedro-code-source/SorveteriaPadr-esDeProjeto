@@ -1,7 +1,6 @@
-package ifpb.sorveteria.decorator;
+package ifpb.sorveteria.factory;
 
 public interface Item {
-    String getTipo();
     String getSabor();
     double getPreco();
 }
