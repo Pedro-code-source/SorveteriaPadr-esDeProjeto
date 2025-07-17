@@ -1,5 +1,6 @@
 package ifpb.sorveteria.app;
 
+import ifpb.sorveteria.command.PedidoCommand;
 import ifpb.sorveteria.decorator.AdicionalGotasChocolate;
 import ifpb.sorveteria.decorator.CoberturaMorango;
 import ifpb.sorveteria.decorator.CoberturaUva;
@@ -8,20 +9,25 @@ import ifpb.sorveteria.model.MilkShake;
 import ifpb.sorveteria.model.Pedido;
 import ifpb.sorveteria.model.Picole;
 import ifpb.sorveteria.model.Sorvete;
+import ifpb.sorveteria.observer.ClienteObserver;
+import ifpb.sorveteria.observer.Observer;
+import ifpb.sorveteria.strategy.Desconto10;
+import ifpb.sorveteria.strategy.DescontoStrategy;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-    Item sorvete = new SorveteFactory().criarItem("Maracujá");
-    Item milkshake = new MilkShakeFactory().criarItem("Abacaxi");
 
-    sorvete = new CoberturaUva(sorvete);
-    milkshake = new AdicionalGotasChocolate(milkshake);
-    sorvete = new AdicionalGotasChocolate(sorvete);
-    Pedido pedido = new PedidoFactory().criarPedido();
-    pedido.adicionarPedido(sorvete);
-    pedido.adicionarPedido(milkshake);
-    pedido.listarPedidos();
-        System.out.println(pedido.getPedidos());
+        Pedido pedido = new Pedido();
+        Item sorvete = new SorveteFactory().criarItem("Chocolate");
 
+        pedido.adicionarPedido(sorvete);
+
+        System.out.println(pedido.getValorFinal());
+
+        DescontoStrategy descontoStrategy = new Desconto10();
+
+        descontoStrategy.calcularDesconto(pedido);
+
+        System.out.println("Desconto: " + descontoStrategy.calcularDesconto(pedido));
     }
 }

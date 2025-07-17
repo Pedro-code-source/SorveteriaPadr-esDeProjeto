@@ -1,4 +1,5 @@
 package ifpb.sorveteria.observer;
 
-public class Observer {
+public interface Observer {
+    void atualizar(String mensagem);
 }
