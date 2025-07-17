@@ -47,6 +47,10 @@ public class Pedido<T extends Item> {
     }
 
     public double getValorFinal() {
+        return valorFinal;
+    }
+
+    public double calcularValorFinal(){
         for (Item i : pedidos){
             valorFinal += i.getPreco();
         }

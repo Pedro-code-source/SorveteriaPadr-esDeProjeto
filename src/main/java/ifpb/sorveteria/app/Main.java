@@ -17,17 +17,21 @@ import ifpb.sorveteria.strategy.DescontoStrategy;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        Pedido pedido = new Pedido();
+        Pedido pedido = new PedidoFactory().criarPedido();
         Item sorvete = new SorveteFactory().criarItem("Chocolate");
-
+        Item milkshake = new MilkShakeFactory().criarItem("Maracujá");
+        sorvete = new AdicionalGotasChocolate(new CoberturaMorango(sorvete));
+        milkshake = new AdicionalGotasChocolate(milkshake);
         pedido.adicionarPedido(sorvete);
+        pedido.adicionarPedido(milkshake);
 
-        System.out.println(pedido.getValorFinal());
 
+        pedido.listarPedidos();
         DescontoStrategy descontoStrategy = new Desconto10();
 
         descontoStrategy.calcularDesconto(pedido);
-
-        System.out.println("Desconto: " + descontoStrategy.calcularDesconto(pedido));
+        pedido.calcularValorFinal();
+        System.out.println(pedido.getValorFinal());
+        System.out.println("Valor final com desconto: " + descontoStrategy.calcularDesconto(pedido) + "R$");
     }
 }
