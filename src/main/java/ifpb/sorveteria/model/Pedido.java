@@ -57,15 +57,13 @@ public class Pedido<T extends Item> {
         return valorFinal;
     }
 
-    public void listarPedidos(){
-        int contador = 0;
+    public void listarItens(){
         for (Item i : pedidos){
-            contador ++;
-            System.out.println(contador + "- " + i.getSabor());
+            System.out.println("-" + i.getSabor());
         }
     }
 
-    public void adicionarPedido(T pedido){
+    public void adicionarItem(T pedido){
         pedidos.add(pedido);
     }
 
