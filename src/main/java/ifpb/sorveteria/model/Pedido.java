@@ -67,6 +67,10 @@ public class Pedido<T extends Item> {
         pedidos.add(pedido);
     }
 
+    public void removerItem(Item pedido){
+        pedidos.remove(pedido);
+    }
+
     public double setValorFinal(double valorFinal) {
         return this.valorFinal = valorFinal;
     }
