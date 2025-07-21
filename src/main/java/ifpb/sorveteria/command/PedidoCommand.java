@@ -1,5 +1,6 @@
 package ifpb.sorveteria.command;
 
+import ifpb.sorveteria.Interfaces.Command;
 import ifpb.sorveteria.model.Pedido;
 
 import java.util.ArrayList;

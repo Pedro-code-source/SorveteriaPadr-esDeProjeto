@@ -1,6 +1,6 @@
 package ifpb.sorveteria.model;
 
-import ifpb.sorveteria.factory.Item;
+import ifpb.sorveteria.Interfaces.Item;
 
 public class Picole implements Item {
     private String sabor;

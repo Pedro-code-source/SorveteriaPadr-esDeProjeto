@@ -1,6 +1,6 @@
 package ifpb.sorveteria.decorator;
 
-import ifpb.sorveteria.factory.Item;
+import ifpb.sorveteria.Interfaces.Item;
 
 public abstract class AdicionalDecorator implements Item {
     protected Item item;

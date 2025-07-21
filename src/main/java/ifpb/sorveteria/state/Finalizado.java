@@ -1,8 +1,9 @@
 package ifpb.sorveteria.state;
 
+import ifpb.sorveteria.Interfaces.EstadoPedido;
 import ifpb.sorveteria.model.Pedido;
 
-public class Finalizado implements EstadoPedido{
+public class Finalizado implements EstadoPedido {
 
     @Override
     public void recebido(Pedido pedido) throws Exception{

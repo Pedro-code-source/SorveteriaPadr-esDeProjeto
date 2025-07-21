@@ -1,8 +1,9 @@
 package ifpb.sorveteria.state;
 
+import ifpb.sorveteria.Interfaces.EstadoPedido;
 import ifpb.sorveteria.model.Pedido;
 
-public class Recebido implements EstadoPedido{
+public class Recebido implements EstadoPedido {
     @Override
     public void recebido(Pedido pedido) throws Exception {
         throw new Exception("O pedido já foi recebido e está em preparo!");

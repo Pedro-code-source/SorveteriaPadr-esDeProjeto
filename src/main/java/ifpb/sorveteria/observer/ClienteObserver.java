@@ -1,5 +1,7 @@
 package ifpb.sorveteria.observer;
 
+import ifpb.sorveteria.Interfaces.Observer;
+
 public class ClienteObserver implements Observer {
     private String nome;
 

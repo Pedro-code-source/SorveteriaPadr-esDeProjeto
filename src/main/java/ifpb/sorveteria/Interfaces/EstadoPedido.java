@@ -1,4 +1,4 @@
-package ifpb.sorveteria.state;
+package ifpb.sorveteria.Interfaces;
 
 import ifpb.sorveteria.model.Pedido;
 

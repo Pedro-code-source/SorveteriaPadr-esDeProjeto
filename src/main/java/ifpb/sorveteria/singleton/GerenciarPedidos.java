@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class GerenciarPedidos {
     private static GerenciarPedidos instance;
     ArrayList<Pedido> pedidos;
+
     private GerenciarPedidos(){
         pedidos = new ArrayList<>();
     }

@@ -1,8 +1,8 @@
 package ifpb.sorveteria.model;
 
-import ifpb.sorveteria.factory.Item;
-import ifpb.sorveteria.observer.Observer;
-import ifpb.sorveteria.state.EstadoPedido;
+import ifpb.sorveteria.Interfaces.Item;
+import ifpb.sorveteria.Interfaces.Observer;
+import ifpb.sorveteria.Interfaces.EstadoPedido;
 import ifpb.sorveteria.state.Recebido;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Pedido<T extends Item> {
 
-    ArrayList<T> pedidos = new ArrayList<T>();
+    ArrayList<Item> pedidos = new ArrayList<Item>();
     private double valorFinal;
     private EstadoPedido estadoDoPedido = new Recebido();
     private List<Observer> observers = new ArrayList();
@@ -42,7 +42,7 @@ public class Pedido<T extends Item> {
         this.idPedido = idPedido;
     }
 
-    public ArrayList<T> getPedidos() {
+    public ArrayList<Item> getPedidos() {
         return pedidos;
     }
 
@@ -63,7 +63,7 @@ public class Pedido<T extends Item> {
         }
     }
 
-    public void adicionarItem(T pedido){
+    public void adicionarItem(Item pedido){
         pedidos.add(pedido);
     }
 
