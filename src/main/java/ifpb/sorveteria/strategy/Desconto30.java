@@ -7,6 +7,6 @@ public class Desconto30 implements DescontoStrategy {
 
     @Override
     public double aplicarDesconto(double valorOriginal) {
-        return valorOriginal * 0.30;
+        return valorOriginal - (valorOriginal * 0.30);
     }
 }

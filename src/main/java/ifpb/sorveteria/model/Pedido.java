@@ -14,9 +14,18 @@ public class Pedido {
     private EstadoPedido estadoDoPedido = new Recebido();
     private CarrinhoDeItens carrinho = new CarrinhoDeItens();
     private NotificadorDePedido notificador = new NotificadorDePedido();
+    private String status;
 
     public Pedido() {
         this.valorFinal = 0;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getIdPedido() {
@@ -72,16 +81,18 @@ public class Pedido {
     public void recebido() throws Exception {
         estadoDoPedido.mudarParaRecebido(this);
         notificador.notificar("Recebido.");
+        status = "Recebido";
     }
 
     public void preparando() throws Exception {
         estadoDoPedido.mudarParaPreparando(this);
         notificador.notificar("Preparando.");
+        status = "Preparando";
     }
 
     public void finalizado() throws Exception {
         estadoDoPedido.mudarParaFinalizado(this);
         notificador.notificar("Finalizado.");
+        status = "Finalizado";
     }
 }
-

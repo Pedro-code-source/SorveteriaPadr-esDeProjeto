@@ -10,11 +10,14 @@ import ifpb.sorveteria.factory.SorveteFactory;
 import ifpb.sorveteria.model.Pedido;
 import ifpb.sorveteria.repository.PedidoRepository;
 import ifpb.sorveteria.Interfaces.PedidoRepositoryInterface;
+import ifpb.sorveteria.repository.Repository;
 import ifpb.sorveteria.singleton.GerenciarPedidos;
+import ifpb.sorveteria.strategy.Desconto;
 import ifpb.sorveteria.strategy.Desconto10;
 import ifpb.sorveteria.strategy.Desconto20;
 import ifpb.sorveteria.strategy.Desconto30;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SorveteriaFacade {
@@ -23,6 +26,7 @@ public class SorveteriaFacade {
     Item item;
     PedidoRepositoryInterface repository = new PedidoRepository();
     Scanner scTeste = new Scanner(System.in);
+    Repository repositorio;
 
     public void opcaoSorvete() {
         System.out.println("Escolha o sabor do sorvete:");
@@ -127,13 +131,21 @@ public class SorveteriaFacade {
         System.out.println("1 - 10% | 2 - 20% | 3 - 30%");
         int escolha = scTeste.nextInt();
 
+        Desconto desconto = new Desconto();
         DescontoStrategy estrategia;
 
         switch (escolha) {
-            case 1 -> estrategia = new Desconto10();
-            case 2 -> estrategia = new Desconto20();
-            case 3 -> estrategia = new Desconto30();
-            default -> {
+            case 1:
+                estrategia = new Desconto10();
+                desconto.setDesconto(10);
+            case 2:
+                estrategia = new Desconto20();
+                desconto.setDesconto(20);
+            case 3:
+                estrategia = new Desconto30();
+                desconto.setDesconto(30);
+            default:
+            {
                 System.out.println("Opção inválida, aplicando desconto padrão (0%).");
                 estrategia = valorOriginal -> valorOriginal;
             }
@@ -144,7 +156,7 @@ public class SorveteriaFacade {
         System.out.printf("💰 Valor com desconto: R$%.2f%n", valorComDesconto);
     }
 
-    public void confirmacaoPedido() {
+    public void confirmacaoPedido() throws SQLException {
         System.out.println("Deseja confirmar o pedido?");
         pedido.exibirItens();
         System.out.println("1 - Confirmar\n2 - Cancelar");
@@ -152,12 +164,16 @@ public class SorveteriaFacade {
 
         switch (opcaoConfirma) {
             case 1 -> {
-                if (repository.buscarPorId(pedido.getIdPedido()) != null) {
+                boolean pedidoExistente = gerenciarPedidos.getPedidos().stream()
+                        .anyMatch(p -> p.getIdPedido() == pedido.getIdPedido());
+
+                if (pedidoExistente) {
                     System.out.println("⚠️ Erro: já existe um pedido com ID " + pedido.getIdPedido());
                 } else {
                     repository.salvar(pedido);
                     gerenciarPedidos.adicionarPedido(pedido);
                     gerenciarPedidos.listarPedidos();
+                    repositorio.salvarPedido(pedido);
                     System.out.println("✅ Pedido confirmado e salvo!");
                 }
             }
@@ -212,6 +228,7 @@ public class SorveteriaFacade {
                 confirmacaoPedido();
             } else if (opcao == 2) {
                 System.out.println("👋 Até a próxima!");
+                gerenciarPedidos.listarPedidos();
                 break;
             }
         }
