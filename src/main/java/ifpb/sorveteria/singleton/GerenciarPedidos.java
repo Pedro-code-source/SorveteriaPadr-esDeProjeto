@@ -30,7 +30,7 @@ public class GerenciarPedidos {
     public void listarPedidos(){
         for (int i = 0; i < pedidos.size();i++){
             System.out.println("Pedido " + (i+1));
-            pedidos.get(i).listarItens();
+            pedidos.get(i).exibirItens();
         }
         }
     };

@@ -6,7 +6,7 @@ import ifpb.sorveteria.model.Pedido;
 public class Desconto30 implements DescontoStrategy {
 
     @Override
-    public double calcularDesconto(Pedido pedido) {
-        return pedido.getValorFinal() - (pedido.getValorFinal() * 0.30);
+    public double aplicarDesconto(double valorOriginal) {
+        return valorOriginal * 0.30;
     }
 }

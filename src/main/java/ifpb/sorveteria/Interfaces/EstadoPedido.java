@@ -3,7 +3,7 @@ package ifpb.sorveteria.Interfaces;
 import ifpb.sorveteria.model.Pedido;
 
 public interface EstadoPedido {
-    void recebido(Pedido pedido) throws Exception;
-    void preparando(Pedido pedido) throws Exception;
-    void finalizado(Pedido pedido) throws Exception;
+    void mudarParaRecebido(Pedido pedido) throws Exception;
+    void mudarParaPreparando(Pedido pedido) throws Exception;
+    void mudarParaFinalizado(Pedido pedido) throws Exception;
 }

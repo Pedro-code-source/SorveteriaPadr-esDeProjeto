@@ -6,17 +6,17 @@ import ifpb.sorveteria.model.Pedido;
 public class Finalizado implements EstadoPedido {
 
     @Override
-    public void recebido(Pedido pedido) throws Exception{
+    public void mudarParaRecebido(Pedido pedido) throws Exception{
         throw new Exception("O pedido já foi entregue!");
     }
 
     @Override
-    public void preparando(Pedido pedido) throws Exception{
+    public void mudarParaPreparando(Pedido pedido) throws Exception{
         throw new Exception("O pedido já foi entregue!");
     }
 
     @Override
-    public void finalizado(Pedido pedido) throws Exception{
-        throw new Exception("O pedido já foi entregue!");
+    public void mudarParaFinalizado(Pedido pedido) {
+        System.out.println("Pedido está agora em estado: Finalizado");
     }
 }
