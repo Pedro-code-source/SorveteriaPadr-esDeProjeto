@@ -9,7 +9,6 @@ import ifpb.sorveteria.factory.PicoleFactory;
 import ifpb.sorveteria.factory.SorveteFactory;
 import ifpb.sorveteria.model.Pedido;
 import ifpb.sorveteria.repository.PedidoRepository;
-import ifpb.sorveteria.Interfaces.PedidoRepositoryInterface;
 import ifpb.sorveteria.repository.Repository;
 import ifpb.sorveteria.singleton.GerenciarPedidos;
 import ifpb.sorveteria.strategy.Desconto;
@@ -24,9 +23,8 @@ public class SorveteriaFacade {
     Pedido pedido;
     GerenciarPedidos gerenciarPedidos;
     Item item;
-    PedidoRepositoryInterface repository = new PedidoRepository();
     Scanner scTeste = new Scanner(System.in);
-    Repository repositorio;
+    Repository repositorio = new Repository();
 
     public void opcaoSorvete() {
         System.out.println("Escolha o sabor do sorvete:");
@@ -127,26 +125,36 @@ public class SorveteriaFacade {
     }
 
     public void aplicarDesconto() {
-        System.out.println("Escolha um desconto:");
-        System.out.println("1 - 10% | 2 - 20% | 3 - 30%");
-        int escolha = scTeste.nextInt();
-
         Desconto desconto = new Desconto();
+        desconto.setDesconto(0);
         DescontoStrategy estrategia;
-
+        System.out.println("Digite seu cupom de desconto:");
+        String escolha = scTeste.nextLine();
         switch (escolha) {
-            case 1:
+            case "CUPOM10":
                 estrategia = new Desconto10();
+                estrategia.aplicarDesconto(pedido.getValorFinal());
                 desconto.setDesconto(10);
-            case 2:
+                pedido.setValorFinal(desconto.getDesconto());
+                System.out.println("Desconto de 10% aplicado!");
+                break;
+            case "CUPOM20":
                 estrategia = new Desconto20();
+                estrategia.aplicarDesconto(pedido.getValorFinal());
                 desconto.setDesconto(20);
-            case 3:
+                pedido.setValorFinal(desconto.getDesconto());
+                System.out.println("Desconto de 20% aplicado!");
+                break;
+            case "CUPOM30":
                 estrategia = new Desconto30();
+                estrategia.aplicarDesconto(pedido.getValorFinal());
                 desconto.setDesconto(30);
+                pedido.setValorFinal(desconto.getDesconto());
+                System.out.println("Desconto de 30% aplicado!");
+                break;
             default:
             {
-                System.out.println("Opção inválida, aplicando desconto padrão (0%).");
+                System.out.println("Cupom inválido, aplicando desconto padrão (0%).");
                 estrategia = valorOriginal -> valorOriginal;
             }
         }
@@ -161,21 +169,23 @@ public class SorveteriaFacade {
         pedido.exibirItens();
         System.out.println("1 - Confirmar\n2 - Cancelar");
         int opcaoConfirma = scTeste.nextInt();
+        scTeste.nextLine();
 
         switch (opcaoConfirma) {
             case 1 -> {
-                boolean pedidoExistente = gerenciarPedidos.getPedidos().stream()
-                        .anyMatch(p -> p.getIdPedido() == pedido.getIdPedido());
-
-                if (pedidoExistente) {
-                    System.out.println("⚠️ Erro: já existe um pedido com ID " + pedido.getIdPedido());
-                } else {
-                    repository.salvar(pedido);
+                aplicarDesconto();
+                pedido.setIdPedido(pedido.getIdPedido()+1);
+//                boolean pedidoExistente = gerenciarPedidos.getPedidos().stream()
+//                        .anyMatch(p -> p.getIdPedido() == pedido.getIdPedido());
+//                if (pedidoExistente) {
+//                    System.out.println("⚠️ Erro: já existe um pedido com ID " + pedido.getIdPedido());
+//                } else {
                     gerenciarPedidos.adicionarPedido(pedido);
                     gerenciarPedidos.listarPedidos();
                     repositorio.salvarPedido(pedido);
                     System.out.println("✅ Pedido confirmado e salvo!");
-                }
+
+//                }
             }
             case 2 -> {
                 pedido.removerItem(item);
@@ -224,9 +234,11 @@ public class SorveteriaFacade {
                     default -> System.out.println("Opção Inválida!");
                 }
 
-                aplicarDesconto();
+
                 confirmacaoPedido();
-            } else if (opcao == 2) {
+
+            }
+            else if (opcao == 2) {
                 System.out.println("👋 Até a próxima!");
                 gerenciarPedidos.listarPedidos();
                 break;

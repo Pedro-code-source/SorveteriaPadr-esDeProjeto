@@ -9,12 +9,13 @@ import ifpb.sorveteria.services.NotificadorDePedido;
 
 public class Pedido {
 
-    private int idPedido;
+    private static int idPedido = 0;
     private double valorFinal;
     private EstadoPedido estadoDoPedido = new Recebido();
     private CarrinhoDeItens carrinho = new CarrinhoDeItens();
     private NotificadorDePedido notificador = new NotificadorDePedido();
-    private String status;
+    private String status = "recebido";
+    private String itensDoPedido;
 
     public Pedido() {
         this.valorFinal = 0;
@@ -62,6 +63,13 @@ public class Pedido {
 
     public void exibirItens() {
         carrinho.obterItens().forEach(i -> System.out.println("- " + i.getSabor()));
+    }
+
+    public String retornoItens(){
+        for (Item i : carrinho.obterItens()){
+            itensDoPedido = i.getSabor();
+        }
+        return itensDoPedido;
     }
 
     public double calcularValorFinal() {
